@@ -3,15 +3,15 @@
 In this folder you will find some docker compose yml files and some environments that you can build and run with it.
 To use compose:
 
-### Install Docker
+## Install Docker
 
 If  you do not have docker yeat follow this guide: https://docs.docker.com/engine/installation/
 
-### Install Docker-Compose
+## Install Docker-Compose
 
 You will find how to install docker-compose in this link: https://docs.docker.com/compose/install/#install-docker-compose
 
-### The 3 steps
+## The 3 steps
 
 You need 3 steps to use compose
 
@@ -25,7 +25,7 @@ You need 3 steps to use compose
 - write the definitions in docker-compose yml file
 - run the command 'docker-compose up'
 
-### Samples
+## Samples
 
 More samples will be avaliable soon
 
