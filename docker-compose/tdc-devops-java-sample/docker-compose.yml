@@ -1,0 +1,48 @@
+version: '2'
+
+services:
+
+  mongodb:
+    image: ulboralabs/alpine-mongodb:latest
+    volumes:
+      - ./mongodb:/data/db
+    expose:
+      - 27017
+
+  java-api:
+    build:
+      context: ./java-api
+      dockerfile: ./dockerfile
+    volumes:
+      - ./java-api/scr/main:/code/src
+    expose:
+      - 4567
+    ports:
+      - 10002:4567
+
+  node-api:
+    image: rafaelpinho/alpine:node-6.2.2-min
+    environment:
+      - port=10001
+      - mongodb=mongodb
+      - javaApiPath=http://java-api:4567/
+    ports:
+      - 10001:10001
+    volumes:
+      - ./node-api:/deploy
+    working_dir: /deploy
+    command: npm start
+    links:
+      - mongodb
+      - java-api
+
+  swagger-ui:
+    image: schickling/swagger-ui
+    environment:
+      - API_URL=http://localhost:10001/api/swagger
+    ports:
+      - "10000:80"
+    links:
+      - node-api
+
+

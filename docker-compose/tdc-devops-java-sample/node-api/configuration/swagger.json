@@ -1,0 +1,341 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Animals API",
+        "description": "Get information about Galapagos animals",
+        "version": "1.0.0"
+    },
+    "host": "localhost:10001",
+    "schemes": [
+        "http"
+    ],
+    "basePath": "/api/v1",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/ping/node": {
+            "get": {
+                "summary": "Check node api response",
+                "description": "Check if node api is up and accepting calls.\n",
+                "tags": [
+                    "Healt Check"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Current time",
+                        "schema": {
+                            "type": "string",
+         		    "format": "date"
+                        }
+                    }
+                }
+            }
+        },
+        "/ping/java": {
+            "get": {
+                "summary": "Check java api response",
+                "description": "Check if java api is up and accepting calls.\n",
+                "tags": [
+                    "Healt Check"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Current time",
+                        "schema": {
+                            "type": "string",
+         		    "format": "date"
+                        }
+                    }
+                }
+            }
+        },
+        "/animals": {
+            "get": {
+                "summary": "List of found Animals",
+                "description": "Returns information about the *Animals* found in Galapagos islands.\n",
+                "tags": [
+                    "Animals"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Animal name to search for",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "header",
+                        "description": "Position in pagination",
+                        "required": false,
+                        "type": "integer",
+                        "format": "Int32"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "header",
+                        "description": "Number of records to retrieve (20 max)",
+                        "required": false,
+                        "type": "integer",
+                        "format": "Int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of animals",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Animals"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Register a new Animal",
+                "description": "Register a new *Animal* found in Galapagos islands.\n",
+                "tags": [
+                    "Animals"
+                ],
+                "parameters": [
+                    {
+                        "name": "animal",
+                        "in": "body",
+                        "description": "info about the animal",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NewAnimal"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The new animal",
+                        "schema": {
+                            "$ref": "#/definitions/Animal"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Clear all data",
+                "description": "Delete all registered animals.\n",
+                "tags": [
+                    "Animals"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "All data clear"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/animals/{id}": {
+            "put": {
+                "summary": "Update animal information",
+                "description": "Update info about an *Animal* found in Galapagos islands.\n",
+                "tags": [
+                    "Animals"
+                ],
+                "parameters": [
+                    {
+                        "name": "animal",
+                        "in": "body",
+                        "description": "info about the animal",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Animal"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "info about the animal",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The new animal",
+                        "schema": {
+                            "$ref": "#/definitions/Animal"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete an Animal",
+                "description": "Removes a specific animal from the list\n",
+                "tags": [
+                    "Animals"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "animal unique identifier",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Animal removed"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "TaxonomicRanking": {
+            "type": "object",
+            "description": "Taxonomic ranking classifications",
+            "properties": {
+                "kingdom": {
+                    "type": "string",
+                    "default": "Animalia"
+                },
+                "phylum": {
+                    "type": "string",
+                    "default": "Chordata"
+                },
+                "class": {
+                    "type": "string",
+                    "default": "Aves"
+                },
+                "order": {
+                    "type": "string",
+                    "default": "Suliformes"
+                },
+                "family": {
+                    "type": "string",
+                    "default": "Sulidae"
+                },
+                "genus": {
+                    "type": "string",
+                    "default": "Sula"
+                },
+                "species": {
+                    "type": "string",
+                    "default": "Sula nebouxii"
+                }
+            }
+        },
+        "NewAnimal": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Animal name",
+                    "default": "Blue-Footed Booby"
+                },
+                "taxonomicRanking": {
+                    "$ref": "#/definitions/TaxonomicRanking"
+                },
+                "picture": {
+                    "type": "string",
+                    "description": "Image URL of the animal.",
+                    "default": "https://s-media-cache-ak0.pinimg.com/564x/a0/22/36/a02236926a25b14de7a3b533b4dea327.jpg"
+                }
+            }
+        },
+        "Animal": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "description": "Unique identifier for the animal",
+                    "default": "577915ff6b2aed19007e2755"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Animal name",
+                    "default": "Frigatebird"
+                },
+                "taxonomicRanking": {
+                    "$ref": "#/definitions/TaxonomicRanking"
+                },
+                "picture": {
+                    "type": "string",
+                    "description": "Image URL of the animal.",
+                    "default": "http://hawaiinaturejournal.weebly.com/uploads/2/0/8/3/20833844/686870_orig.jpg?299"
+                }
+            }
+        },
+        "Animals": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Position in pagination."
+                },
+                "limit": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Number of records to retrieve (20 max)."
+                },
+                "count": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Total number of records."
+                },
+                "records": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Animal"
+                    }
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "errorCode": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "developerMessage": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

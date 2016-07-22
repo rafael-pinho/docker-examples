@@ -1,0 +1,19 @@
+{
+  "name": "node-api",
+  "version": "1.0.0",
+  "description": "a nodejs api sample with swagger",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "rafael pinho",
+  "dependencies": {
+    "client-http": "0.0.7",
+    "express": "^4.14.0",
+    "fs": "0.0.2",
+    "http-client": "^4.1.0",
+    "mongoose": "^4.5.3",
+    "path": "^0.12.7",
+    "swagger-express-middleware": "^1.0.0-alpha.12"
+  }
+}
