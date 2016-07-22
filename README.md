@@ -11,5 +11,5 @@ Check on dockerhub
 Docker compose samples. You will find some environments that you can run.
 
 <br>
-## kubernates
+## kubernetes
 Soon
