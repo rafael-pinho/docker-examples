@@ -1,6 +1,7 @@
 ## Notes
 
 Use port 5672 to connect and port 15672 to access management api using http.
+
 Default userName:password = guest:guest
  
  ```
