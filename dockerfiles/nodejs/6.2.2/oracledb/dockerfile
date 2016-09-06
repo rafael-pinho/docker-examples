@@ -1,0 +1,30 @@
+FROM node:6.2.2
+
+MAINTAINER Rafael Pinho <rafaelpinho@protonmail.com>
+
+WORKDIR /opt
+
+COPY instantclient-basic-linux.x64-12.1.0.2.0.zip ./
+COPY instantclient-sdk-linux.x64-12.1.0.2.0.zip ./
+
+RUN apt-get update && \
+    apt-get install unzip && \
+    mkdir oracle && \
+    unzip instantclient-basic-linux.x64-12.1.0.2.0.zip -d oracle && \
+    rm instantclient-basic-linux.x64-12.1.0.2.0.zip && \
+    unzip instantclient-sdk-linux.x64-12.1.0.2.0.zip -d oracle && \
+    rm instantclient-sdk-linux.x64-12.1.0.2.0.zip && \
+    cd oracle && \
+    mv instantclient_12_1 instantclient && \
+    cd instantclient && \
+    ln -s libclntsh.so.12.1 libclntsh.so && \
+    mkdir /deploy
+
+ENV LD_LIBRARY_PATH=/opt/oracle/instantclient:$LD_LIBRARY_PATH \
+    OCI_LIB_DIR=/opt/oracle/instantclient \
+    OCI_INC_DIR=/opt/oracle/instantclient/sdk/include
+
+WORKDIR /deploy
+
+CMD npm start
+
