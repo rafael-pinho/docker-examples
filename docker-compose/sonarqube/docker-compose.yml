@@ -1,24 +1,35 @@
-version: '2'
+version: "2"
 
 services:
-
-  postgres:
-    image: kiasaki/alpine-postgres
-    expose:
-      - 5432
-    environment:
-      - POSTGRES_PASSWORD=51316918519
-      - POSTGRES_USER=sonar
-      - POSTGRES_DB=sonar
-
-  sonar:
-    image: sonarqube:alpine
+  sonarqube:
+    image: sonarqube
     ports:
-      - 9000:9000
-      - 9092:9092
+      - "9000:9000"
     environment:
-      - SONARQUBE_JDBC_USERNAME=sonar
-      - SONARQUBE_JDBC_PASSWORD=51316918519
-      - SONARQUBE_JDBC_URL=jdbc:postgresql://postgres:5432/sonar
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://database:5432/sonar
+    volumes:
+      - sonarqube_conf:/opt/sonarqube/conf 
+      - sonarqube_data:/opt/sonarqube/data 
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+      - projects: /projects
     links:
-      - postgres
+      - database
+
+  database:
+    image: postgres
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+    volumes:
+      - postgresql:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
+
+volumes:
+  sonarqube_conf: ./sonarqube/conf
+  sonarqube_data: ./sonarqube/data
+  sonarqube_extensions: ./sonarqube/extensions
+  sonarqube_bundled-plugins: ./sonarqube/plugins
+  postgresql: ./postgresql
+  postgresql_data: ./postgresql/data
+  projects: ./sonarqube/projects
