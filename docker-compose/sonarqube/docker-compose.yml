@@ -7,7 +7,7 @@ services:
     expose:
       - 5432
     environment:
-      - POSTGRES_PASSWORD=51316918519
+      - POSTGRES_PASSWORD=123456789
       - POSTGRES_USER=sonar
       - POSTGRES_DB=sonar
 
@@ -18,7 +18,12 @@ services:
       - 9092:9092
     environment:
       - SONARQUBE_JDBC_USERNAME=sonar
-      - SONARQUBE_JDBC_PASSWORD=51316918519
+      - SONARQUBE_JDBC_PASSWORD=123456789
       - SONARQUBE_JDBC_URL=jdbc:postgresql://postgres:5432/sonar
     links:
       - postgres
+      
+  jenkins:
+    image: jenkins
+    ports:
+      - 49001:8080
