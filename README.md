@@ -1,15 +1,8 @@
-# docker-world
-Dockerfiles and samples of tools for container management and orchestration
+# About
+Dockerfiles and container management and orchestration tools samples.
 
-<br>
 ## [dockerfiles](/dockerfiles)
-Contains some alpine based images. Please, for production, use official images. 
-Check on dockerhub
+Contains some alpine based images. Check on [dockerhub]('https://hub.docker.com/u/rafaelpinho/').
 
-<br>
 ## [docker-compose](/docker-compose)
-Docker compose samples. You will find some environments that you can run.
-
-<br>
-## kubernetes
-Soon
+Some environments samples to run with compose.
