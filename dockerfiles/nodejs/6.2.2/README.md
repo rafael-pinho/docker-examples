@@ -6,8 +6,8 @@ Contains two files:
 to be possible install some npm packages
  
 ```
-docker run -d -e -p 10000:10000 rafaelpinho/node:6.2.2-min
-docker run -d -e -p 10000:10000 rafaelpinho/node:6.2.2-full
+docker run -d -p 10000:10000 rafaelpinho/node:6.2.2-min
+docker run -d -p 10000:10000 rafaelpinho/node:6.2.2-full
 ```
 
 If you want a nodejs image to run with oracledb package see [this](./oracledb).
