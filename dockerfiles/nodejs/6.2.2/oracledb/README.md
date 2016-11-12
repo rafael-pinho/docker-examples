@@ -3,7 +3,7 @@
 Build a node image able to use npm oracledb package
  
 ```
-docker run -d -e -p 10000:10000 rafaelpinho/node:ora-6.2.2
+docker run -d -e -p 10000:80 rafaelpinho/node:ora-6.2.2
 ```
 
 ## Instructions
@@ -13,5 +13,5 @@ and 'instantclient-sdk-linux.x64-12.1.0.2.0.zip' from oracle website. Download a
 After do this build your image.
 
 ```
-docker build -f dockerfile -t yourtag ./
+docker build -f dockerfile -t yourtag .
 ```
