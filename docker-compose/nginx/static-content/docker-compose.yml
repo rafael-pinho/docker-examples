@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+
+  nginx:
+    image: nginx
+    volumes:
+      - ./deploy:./website
+    ports:
+      - 10000:80
