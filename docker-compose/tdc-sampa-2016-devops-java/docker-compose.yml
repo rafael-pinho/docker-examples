@@ -44,5 +44,3 @@ services:
       - "10000:80"
     links:
       - node-api
-
-
