@@ -5,6 +5,6 @@ services:
   nginx:
     image: nginx
     volumes:
-      - ./deploy:./website
+      - ./website:/deploy
     ports:
       - 10000:80
