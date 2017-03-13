@@ -2,7 +2,7 @@ FROM rafaelpinho/alpine:latest
 
 MAINTAINER Rafael Pinho <rafaelpinho@protonmail.com>
 
-ENV NODE_VERSION=7.6 \
+ENV NODE_VERSION=7.7.2 \
     NPM_VERSION=3
 
 RUN apk add --no-cache  curl \
